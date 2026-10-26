@@ -1,49 +1,44 @@
 # netscan
 
-netscan is a Python port scanner that is fast and multi-threaded but it is dirty.
+A small multi-threaded TCP port scanner in pure Python. Use it when you want to know which ports are open on a machine and nmap feels like too much.
 
-In cases like this nmap may be excessive.. You may simply want to know what is open on a host without hanging around. I wanted to get it done ASAP, which is why I created netscan.
+No dependencies beyond the Python standard library.
 
 ## Usage
 
 ```bash
-python netscan.py 127.0.0.1
+python netscan.py 192.168.1.10
 ```
 
 ## Options
 
-arguments:
-
-target                target IP or hostname
-
-options:
-
--h --help            show this help message and exit
-
-A thread is an individual copy of a program. A thread is an instance of a program.
-
-The number of threads (default 100).
-
-Ports.-p PORTS, --ports PORTS
-
-ports 1, to N (default: 1024)
-
---timeout=TIMEOUT socket time-out (default: 0.5s)
+| Option | What it does | Default |
+| --- | --- | --- |
+| `target` | IP address or hostname to scan | required |
+| `-t`, `--threads` | how many ports to check at the same time | 100 |
+| `-p`, `--ports` | scan ports 1 up to this number | 1024 |
+| `--timeout` | seconds to wait for each port | 0.5 |
 
 ## Example
 
 ```
 $ python netscan.py 192.168.1.1 -t 200 -p 5000
-
-[] scanning 192.168.1.1 (1-5000) with 200 threads...
-
-[] Scan finished in 2.14 seconds
+[*] scanning 192.168.1.1 (1-5000) with 200 threads...
+[*] scan finished in 2.14 seconds
 
 [+] OPEN PORTS:
-
--> 22
-
--> 80
-
--> 443
+  -> 22
+  -> 80
+  -> 443
 ```
+
+Only scan machines you own or have permission to scan.
+
+## Ideas for later
+
+- UDP scanning
+- show which service is running on each open port
+
+## License
+
+MIT
